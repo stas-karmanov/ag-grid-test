@@ -18,5 +18,6 @@ export interface IVideo {
     id: string;
     description: string;
     publishedAt: string;
-    thumbnails: string;
+    thumbnail: string;
+    title: string;
 }

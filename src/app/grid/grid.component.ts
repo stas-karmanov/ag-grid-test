@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { GridOptions } from 'ag-grid-community';
-import { startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { gridColumns } from './grid.models';
@@ -17,7 +16,7 @@ export class GridComponent {
         rowSelection: 'multiple',
     };
 
-    public videos: Observable<IVideo[]> = this.youtubeService.getVideos().pipe(startWith([]));
+    public videos: Observable<IVideo[]> = this.youtubeService.getVideos();
 
     constructor(private youtubeService: YoutubeService) {}
 }

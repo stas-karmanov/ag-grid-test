@@ -10,7 +10,7 @@ export class PublishDateCellComponent implements ICellRendererAngularComp {
     public publishDate: string;
 
     public agInit({ value }: ICellRendererParams) {
-        this.publishDate = new Date(value).toString();
+        this.publishDate = new Date(value).toLocaleString();
     }
 
     public refresh() {

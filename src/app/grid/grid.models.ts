@@ -6,19 +6,19 @@ export const gridColumns: ColDef[] = [
     {
         headerName: '',
         field: 'thumbnail',
-        width: 150,
+        width: 240,
         cellRendererFramework: ThumbnailCellComponent,
     },
     {
         headerName: 'Published on',
         field: 'publishedAt',
-        width: 120,
+        width: 150,
         cellRendererFramework: PublishDateCellComponent,
     },
     {
         headerName: 'Video Title',
         field: 'title',
-        width: 100,
+        width: 240,
         cellRendererFramework: VideoLinkCellComponent,
     },
     { headerName: 'Description', field: 'description', width: 350 },

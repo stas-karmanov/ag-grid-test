@@ -26,6 +26,14 @@ export class GridComponent {
 
             return [...params.defaultItems, openInNewTapItem];
         },
+        defaultColDef: {
+            autoHeight: true,
+            sortable: true,
+            resizable: true,
+            cellStyle: {
+                'white-space': 'normal',
+            },
+        },
     };
 
     public videos: Observable<IVideo[]> = this.youtubeService.getVideos();

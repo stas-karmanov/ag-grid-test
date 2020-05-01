@@ -21,7 +21,7 @@ export interface IVideo {
     thumbnail: string;
     title: string;
 }
-
+// TODO remove before "release"
 export const responseMock = {
     kind: 'youtube#searchListResponse',
     etag: '"Dn5xIderbhAnUk5TAW0qkFFir0M/xIf1sTU-_DeeoO1FpEYgJpV0ix8"',

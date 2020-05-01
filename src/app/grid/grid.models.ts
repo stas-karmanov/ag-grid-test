@@ -12,10 +12,12 @@ import {
 export const gridColumns: ColDef[] = [
     {
         headerName: '',
+        colId: 'checkboxColumn',
         cellRendererFramework: CheckboxCellComponent,
         headerComponentFramework: CheckboxColumnHeaderComponent,
         width: 30,
-        // hide: true,
+        hide: true,
+        cellStyle: { display: 'flex' },
     },
     {
         headerName: '',
@@ -26,16 +28,16 @@ export const gridColumns: ColDef[] = [
     {
         headerName: 'Published on',
         field: 'publishedAt',
-        width: 150,
+        flex: 1,
         cellRendererFramework: PublishDateCellComponent,
     },
     {
         headerName: 'Video Title',
         field: 'title',
-        width: 240,
+        flex: 1,
         cellRendererFramework: VideoLinkCellComponent,
     },
-    { headerName: 'Description', field: 'description', width: 350 },
+    { headerName: 'Description', field: 'description', flex: 2 },
 ];
 
 export const statusPanels: StatusPanelDef[] = [

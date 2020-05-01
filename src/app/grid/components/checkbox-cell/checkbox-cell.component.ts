@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { ICellRendererParams, GridApi, RowNode } from 'ag-grid-community';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
+import { ICellRendererParams, RowNode } from 'ag-grid-community';
+import { fromEvent, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -9,17 +9,18 @@ import { map } from 'rxjs/operators';
     templateUrl: './checkbox-cell.component.html',
 })
 export class CheckboxCellComponent implements ICellRendererAngularComp, OnDestroy {
-    public checkboxState$ = new BehaviorSubject<boolean>(false);
+    public checkboxState = false;
 
     private node: RowNode;
     private subscription: Subscription;
 
     agInit({ node, api }: ICellRendererParams) {
         this.node = node;
+        this.checkboxState = this.node.isSelected();
 
         this.subscription = fromEvent(api, 'selectionChanged')
             .pipe(map(() => this.node.isSelected()))
-            .subscribe(this.checkboxState$);
+            .subscribe((checkboxState) => (this.checkboxState = checkboxState));
     }
 
     refresh() {

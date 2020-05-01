@@ -37,6 +37,9 @@ export class GridComponent {
         statusBar: {
             statusPanels,
         },
+        rowMultiSelectWithClick: true,
+        suppressCellSelection: true,
+        suppressRowClickSelection: true,
     };
 
     public videos: Observable<IVideo[]> = this.youtubeService.getVideos();

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IHeaderAngularComp } from 'ag-grid-angular';
-import { BehaviorSubject, Subscription, fromEvent } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { GridApi, IHeaderParams } from 'ag-grid-community';
 import { map } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
     templateUrl: './checkbox-column-header.component.html',
 })
 export class CheckboxColumnHeaderComponent implements IHeaderAngularComp, OnDestroy {
-    public checkboxState$ = new BehaviorSubject<boolean>(false);
+    public checkboxState = false;
 
     private gridApi: GridApi;
     private subscription: Subscription;
@@ -19,7 +19,7 @@ export class CheckboxColumnHeaderComponent implements IHeaderAngularComp, OnDest
 
         this.subscription = fromEvent(this.gridApi, 'selectionChanged')
             .pipe(map(() => this.gridApi.getDisplayedRowCount() === this.gridApi.getSelectedRows().length))
-            .subscribe(this.checkboxState$);
+            .subscribe((checkboxState) => (this.checkboxState = checkboxState));
     }
 
     public onSelectedStateChange(checkboxState: boolean) {

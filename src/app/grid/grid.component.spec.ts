@@ -55,7 +55,7 @@ describe('GridComponent', () => {
     it('should create "Open in new tab" context menu option', async (done) => {
         youtubeServiceStub.generateVideoLink.and.callFake((id) => `http://youtubeurl/${id}`);
 
-        await checkboxColumnHeaderComponent.gridReady$;
+        await fixture.whenRenderingDone();
 
         const publishDate: HTMLElement = document.querySelector('test-publish-date-cell > div');
         publishDate?.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true }));
@@ -73,7 +73,7 @@ describe('GridComponent', () => {
     });
 
     it('should open checkbox column while Toggle Selection clicking', async (done) => {
-        await checkboxColumnHeaderComponent.gridReady$;
+        await fixture.whenRenderingDone();
 
         expect(document.querySelector('test-checkbox-cell')).toBeFalsy();
 
@@ -86,14 +86,14 @@ describe('GridComponent', () => {
     });
 
     it('should display selected rows count after rows selection', async (done) => {
-        await checkboxColumnHeaderComponent.gridReady$;
+        await fixture.whenRenderingDone();
 
         const toggleSelectionButton: HTMLButtonElement = document.querySelector('.toggle-selection-button');
         toggleSelectionButton.click();
         fixture.detectChanges();
 
         // wait until checkbox column appears
-        await sleep(1000);
+        await fixture.whenRenderingDone();
 
         const checkbox: HTMLInputElement = document.querySelector('test-checkbox-cell > test-checkbox >input');
         checkbox.click();
@@ -106,12 +106,3 @@ describe('GridComponent', () => {
         done();
     });
 });
-
-const sleep = (time: number) => {
-    let resolveSleep: () => void;
-    const sleep$ = new Promise<void>((res) => (resolveSleep = res));
-
-    setTimeout(() => resolveSleep(), time);
-
-    return sleep$;
-};

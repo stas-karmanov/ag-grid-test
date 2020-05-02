@@ -2,7 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { GridOptions, MenuItemDef } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
-import { gridColumns, statusPanels } from './grid.models';
+import { gridColumns } from './grid.columns';
+import { statusPanels } from './grid.panels';
 import { YoutubeService } from './services/youtube.service';
 import { IVideo } from './services/youtube.models';
 import { WINDOW } from '../window';
@@ -45,12 +46,5 @@ export class GridComponent {
 
     public videos$: Observable<IVideo[]> = this.youtubeService.getVideos();
 
-    private resolveGridReady: () => void;
-    public gridReady$ = new Promise((res) => (this.resolveGridReady = res));
-
     constructor(private youtubeService: YoutubeService, @Inject(WINDOW) private window: Window) {}
-
-    public onGridReady() {
-        this.resolveGridReady();
-    }
 }

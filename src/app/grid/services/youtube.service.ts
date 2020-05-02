@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { IVideosResponse, IVideo, IRawVideo, responseMock } from './youtube.models';
+import { IVideosResponse, IVideo, IRawVideo } from './youtube.models';
 
 @Injectable({
     providedIn: 'root',
@@ -18,8 +18,6 @@ export class YoutubeService {
 
     public getVideos(): Observable<IVideo[]> {
         return this.http.get<IVideosResponse>(this.requestUrl).pipe(map(({ items }) => this.transformVideos(items)));
-        // TODO remove it before "release"
-        // return of(responseMock).pipe(map(({ items }) => this.transformVideos(items)));
     }
 
     public generateVideoLink(videoId: string): string {

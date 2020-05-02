@@ -52,6 +52,8 @@ describe('CheckboxColumnHeaderComponent', () => {
         gridApiStub.getSelectedRows.and.callFake(() => [{}, {}]);
 
         checkboxColumnHeaderComponent.agInit(({ api: gridApiStub } as any) as IHeaderParams);
+        changeDetector.detectChanges();
+
         gridApiStub.dispatchEvent(new CustomEvent('selectionChanged'));
         changeDetector.detectChanges();
 
@@ -66,6 +68,8 @@ describe('CheckboxColumnHeaderComponent', () => {
 
     it('should call grid api for selection/deselection all rows', () => {
         checkboxColumnHeaderComponent.agInit(({ api: gridApiStub } as any) as IHeaderParams);
+        changeDetector.detectChanges();
+
         const checkbox: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
         checkbox.click();

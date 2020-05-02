@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { IStatusPanelParams } from 'ag-grid-community';
 
 import { SelectionToggleComponent } from './selection-toggle.component';
+import { CHECKBOX_COLUMN_ID } from '../../grid.models';
 
 describe('SelectionToggleComponent', () => {
     let selectionToggleComponent: SelectionToggleComponent;
@@ -33,10 +34,10 @@ describe('SelectionToggleComponent', () => {
 
         button.click();
         fixture.detectChanges();
-        expect(columnApiStub.setColumnVisible).toHaveBeenCalledWith('checkboxColumn', true);
+        expect(columnApiStub.setColumnVisible).toHaveBeenCalledWith(CHECKBOX_COLUMN_ID, true);
 
         button.click();
         fixture.detectChanges();
-        expect(columnApiStub.setColumnVisible).toHaveBeenCalledWith('checkboxColumn', false);
+        expect(columnApiStub.setColumnVisible).toHaveBeenCalledWith(CHECKBOX_COLUMN_ID, false);
     });
 });

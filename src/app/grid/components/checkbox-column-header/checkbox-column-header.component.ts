@@ -16,14 +16,16 @@ export class CheckboxColumnHeaderComponent implements IHeaderAngularComp, OnDest
     }
 
     private gridApi: GridApi;
-    private subscription: Subscription;
+    private subscription = new Subscription();
 
     agInit({ api }: IHeaderParams) {
         this.gridApi = api;
 
-        this.subscription = fromEvent(this.gridApi, 'selectionChanged')
-            .pipe(map(() => this.gridApi.getDisplayedRowCount() === this.gridApi.getSelectedRows().length))
-            .subscribe(CheckboxColumnHeaderComponent.state$);
+        this.subscription.add(
+            fromEvent(this.gridApi, 'selectionChanged')
+                .pipe(map(() => this.gridApi.getDisplayedRowCount() === this.gridApi.getSelectedRows().length))
+                .subscribe(CheckboxColumnHeaderComponent.state$),
+        );
     }
 
     public onSelectedStateChange(checkboxState: boolean) {

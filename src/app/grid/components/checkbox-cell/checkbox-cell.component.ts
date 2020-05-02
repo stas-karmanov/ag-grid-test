@@ -12,17 +12,19 @@ export class CheckboxCellComponent implements ICellRendererAngularComp, OnDestro
     public checkboxState$ = new BehaviorSubject<boolean>(false);
 
     private node: RowNode;
-    private subscription: Subscription;
+    private subscription = new Subscription();
 
     agInit({ node, api }: ICellRendererParams) {
         this.node = node;
 
-        this.subscription = fromEvent(api, 'selectionChanged')
-            .pipe(
-                map(() => this.node.isSelected()),
-                startWith(this.node.isSelected()),
-            )
-            .subscribe(this.checkboxState$);
+        this.subscription.add(
+            fromEvent(api, 'selectionChanged')
+                .pipe(
+                    map(() => this.node.isSelected()),
+                    startWith(this.node.isSelected()),
+                )
+                .subscribe(this.checkboxState$),
+        );
     }
 
     refresh() {

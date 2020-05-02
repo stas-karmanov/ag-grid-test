@@ -9,17 +9,20 @@ import { mockResponse, expectedVideos } from './youtube.mocks';
 describe('YoutubeService', () => {
     let testScheduler: TestScheduler;
     let youtubeService: YoutubeService;
+    let httpStub: { get: jasmine.Spy };
 
     beforeEach(() => {
         testScheduler = new TestScheduler((actual, expected) => {
             expect(actual).toEqual(expected);
         });
 
+        httpStub = jasmine.createSpyObj('HttpClient', ['get']);
+
         TestBed.configureTestingModule({
             providers: [
                 {
                     provide: HttpClient,
-                    useValue: { get: () => of(mockResponse) },
+                    useValue: httpStub,
                 },
                 YoutubeService,
             ],
@@ -30,6 +33,8 @@ describe('YoutubeService', () => {
 
     describe('#getVideos', () => {
         it('should return correctly transformed result', () => {
+            httpStub.get.and.returnValue(of(mockResponse));
+
             testScheduler.run(({ expectObservable }) => {
                 const expectedMarble = '(a|)';
                 const expectedValues = { a: expectedVideos };

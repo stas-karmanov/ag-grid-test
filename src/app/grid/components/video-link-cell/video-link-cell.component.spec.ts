@@ -9,13 +9,11 @@ describe('VideoLinkCellComponent', () => {
     let videoLinkCellComponent: VideoLinkCellComponent;
     let fixture: ComponentFixture<VideoLinkCellComponent>;
 
-    const youtubeServiceStub = {
-        generateVideoLink(videoId: string): string {
-            return `http://youtubeurl/${videoId}`;
-        },
-    } as YoutubeService;
+    let youtubeServiceStub: { generateVideoLink: jasmine.Spy };
 
     beforeEach(async(() => {
+        youtubeServiceStub = jasmine.createSpyObj('YoutubeService', ['generateVideoLink']);
+
         TestBed.configureTestingModule({
             providers: [
                 {
@@ -37,6 +35,8 @@ describe('VideoLinkCellComponent', () => {
     });
 
     it('should render anchor tag with correct href', () => {
+        youtubeServiceStub.generateVideoLink.and.callFake((videoId: string) => `http://youtubeurl/${videoId}`);
+
         videoLinkCellComponent.agInit({ data: { title: 'href', id: '123' } } as ICellRendererParams);
         fixture.detectChanges();
 

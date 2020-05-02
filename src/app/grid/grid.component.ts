@@ -21,6 +21,7 @@ export class GridComponent {
 
             const openInNewTapItem: MenuItemDef = {
                 name: 'Open in new tab',
+                cssClasses: ['open-in-new-tab'],
                 action: () => this.window.open(videoLink, '_blank'),
             };
 
@@ -42,7 +43,14 @@ export class GridComponent {
         suppressRowClickSelection: true,
     };
 
-    public videos: Observable<IVideo[]> = this.youtubeService.getVideos();
+    public videos$: Observable<IVideo[]> = this.youtubeService.getVideos();
+
+    private resolveGridReady: () => void;
+    public gridReady$ = new Promise((res) => (this.resolveGridReady = res));
 
     constructor(private youtubeService: YoutubeService, @Inject(WINDOW) private window: Window) {}
+
+    public onGridReady() {
+        this.resolveGridReady();
+    }
 }

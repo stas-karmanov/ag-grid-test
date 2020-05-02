@@ -2,5 +2,6 @@
     style="height: 95vh; width: 100%;"
     class="ag-theme-balham"
     [gridOptions]="gridOptions"
-    [rowData]="videos | async"
+    [rowData]="videos$ | async"
+    (gridReady)="onGridReady()"
 ></ag-grid-angular>

@@ -6,7 +6,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { CommonCheckboxComponent } from '../checkbox/checkbox.component';
 import { CheckboxColumnHeaderComponent } from './checkbox-column-header.component';
 
-describe('CheckboxCellComponent', () => {
+describe('CheckboxColumnHeaderComponent', () => {
     let checkboxColumnHeaderComponent: CheckboxColumnHeaderComponent;
     let fixture: ComponentFixture<CheckboxColumnHeaderComponent>;
     let changeDetector: ChangeDetectorRef;
